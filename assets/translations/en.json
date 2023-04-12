@@ -1,0 +1,27 @@
+{
+  "home": {
+    "bosh_sahifa": "Бош саҳифа",
+    "search_text": "Қандай маълумот излаябсиз?",
+    "saralash": "Саралаш",
+    "tasdiqlash": "Тасдиқлаш",
+    "bekor_qilish": "Бекор қилиш",
+    "hisob_raqam": "Ҳисоб рақами:",
+    "shartnoma_raqam": "Шартнома рақами:"
+  },
+
+  "store":{
+    "kirim":"Кирим",
+    "chiqim":"Чиқим",
+    "kirim_narxi":"Кирим нархи",
+    "chiqim_narxi":"Чиқим нархи",
+    "miqdori":"Миқдори:",
+    "tolov_turi":"Тўлов тури:",
+    "tolov_sanasi":"Тўлов санаси:",
+    "eslatma_sanasi":"Еслатма санаси:",
+    "tolov_vaqti":"Тўлов вақти:"
+  },
+  "login": {
+  
+  }
+  
+}
