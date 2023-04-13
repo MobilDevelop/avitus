@@ -55,6 +55,9 @@ class BorderButton extends StatelessWidget {
             horizontal: icon != null ? 0 : ScreenSize.w24,
             vertical: ScreenSize.h12),
         decoration: BoxDecoration(
+            color: borderColor == null
+                ? AppTheme.colors.primary.withOpacity(0.2)
+                : borderColor!.withOpacity(0.2),
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(color: borderColor ?? AppTheme.colors.primary)),
         alignment: Alignment.center,

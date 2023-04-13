@@ -18,7 +18,21 @@
     "tolov_turi":"Тўлов тури:",
     "tolov_sanasi":"Тўлов санаси:",
     "eslatma_sanasi":"Еслатма санаси:",
-    "tolov_vaqti":"Тўлов вақти:"
+    "tolov_vaqti":"Тўлов вақти:",
+    "jami_summa":"Жами сумма:"
+  },
+  "addStore":{
+    "ferma":"Фирма",
+    "nomi":"Номини киритинг",
+    "hisob_raqam":"Ҳисоб рақами",
+    "hisob_raqam_kiriting":"Ҳисоб рақамини киритинг",
+    "shartnoma_raqam":"Шартнома рақами",
+    "nfo":"НФО",
+    "nfo_kiriting":"НФО ни киритинг",
+    "inn":"ИНН",
+    "inn_kiriting":"ИНН ни киритинг",
+    "kamera":"Камера",
+    "galereya":"Гелерея"
   },
   "login": {
   

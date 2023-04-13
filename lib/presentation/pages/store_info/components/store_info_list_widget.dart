@@ -27,7 +27,8 @@ class StoreInfoListWidget extends StatelessWidget {
             top: ScreenSize.h20,
             bottom: ScreenSize.h14),
         decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.colors.primary, width: 1.5),
+            color: AppTheme.colors.primary.withOpacity(0.2),
+            border: Border.all(color: AppTheme.colors.primary, width: 2.5),
             borderRadius: BorderRadius.circular(10.r)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,12 +44,21 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text("120 mln", style: AppTheme.data.textTheme.headline4),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                Row(
                   children: [
-                    SvgPicture.asset(AppIcons.nomer, height: 16.h),
-                    Gap(ScreenSize.h4),
-                    Text("12", style: AppTheme.data.textTheme.headline4)
+                    Image.asset(
+                      AppIcons.down,
+                      color: AppTheme.colors.primary,
+                    ),
+                    Gap(ScreenSize.w8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(AppIcons.nomer, height: 16.h),
+                        Gap(ScreenSize.h4),
+                        Text("12", style: AppTheme.data.textTheme.headline4)
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -94,7 +104,8 @@ class StoreInfoListWidget extends StatelessWidget {
             top: ScreenSize.h14,
             bottom: ScreenSize.h12),
         decoration: BoxDecoration(
-            border: Border.all(color: AppTheme.colors.red, width: 1.5),
+            color: AppTheme.colors.red.withOpacity(0.13),
+            border: Border.all(color: AppTheme.colors.red, width: 2.5),
             borderRadius: BorderRadius.circular(10.r)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,12 +121,21 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text("120 mln", style: AppTheme.data.textTheme.headline4),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                Row(
                   children: [
-                    SvgPicture.asset(AppIcons.nomer, height: 16.h),
-                    Gap(ScreenSize.h4),
-                    Text("12", style: AppTheme.data.textTheme.headline4)
+                    Image.asset(
+                      AppIcons.up,
+                      color: AppTheme.colors.red,
+                    ),
+                    Gap(ScreenSize.w8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(AppIcons.nomer, height: 16.h),
+                        Gap(ScreenSize.h4),
+                        Text("12", style: AppTheme.data.textTheme.headline4)
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -129,7 +149,7 @@ class StoreInfoListWidget extends StatelessWidget {
                       height: ScreenSize.h24,
                       width: ScreenSize.w32,
                       decoration: BoxDecoration(
-                          color: AppTheme.colors.primary,
+                          color: Colors.grey.shade600,
                           borderRadius: BorderRadius.circular(4.r)),
                     ),
                     Gap(ScreenSize.w4),

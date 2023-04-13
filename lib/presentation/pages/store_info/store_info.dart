@@ -6,6 +6,7 @@ import 'package:avitus/presentation/pages/store_info/components/fab_menu.dart';
 import 'package:avitus/presentation/pages/store_info/components/store_info_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class StoreInfoPage extends StatelessWidget {
   const StoreInfoPage({super.key});
@@ -22,24 +23,15 @@ class StoreInfoPage extends StatelessWidget {
             backgroundColor: AppTheme.colors.primary,
             title: Text(
               "Umid Auto lizing",
-              style: TextStyle(
-                  color: AppTheme.colors.secondary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
+              style: AppTheme.data.textTheme.headline4,
             ),
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Container(
-              //   height: 50.h,
-              //   width: double.maxFinite,
-              //   margin: EdgeInsets.only(top: ScreenSize.h4),
-              //   color: AppTheme.colors.primary,
-              // ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (context, index) =>
@@ -47,8 +39,31 @@ class StoreInfoPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                height: 45.h,
+                width: double.maxFinite,
+                margin: EdgeInsets.only(top: ScreenSize.h4),
+                padding: EdgeInsets.only(left: ScreenSize.w10, right: 75.w),
+                decoration: BoxDecoration(
+                    color: AppTheme.colors.primary.withOpacity(0.15),
+                    border:
+                        Border.all(color: AppTheme.colors.primary, width: 1.5)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(tr('store.jami_summa'),
+                            style: AppTheme.data.textTheme.headline4),
+                      ],
+                    ),
+                    Text("12,5 mln", style: AppTheme.data.textTheme.headline4),
+                  ],
+                ),
+              ),
             ],
           ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: const FabMenu(),
         );
       }),

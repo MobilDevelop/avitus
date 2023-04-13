@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:avitus/application/add_store/add_store_cubit.dart';
 import 'package:avitus/application/app_manager/app_manager_cubit.dart';
 import 'package:avitus/application/home/home_cubit.dart';
 import 'package:avitus/application/store_info/store_info_cubit.dart';
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => AppManagerCubit()..init()),
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => StoreInfoCubit()),
+          BlocProvider(create: (context) => AddStoreCubit()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 812),

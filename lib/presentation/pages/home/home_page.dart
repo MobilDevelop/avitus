@@ -1,15 +1,11 @@
 import 'package:avitus/application/home/home_cubit.dart';
 import 'package:avitus/application/home/home_state.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
-import 'package:avitus/presentation/assets/theme/app_theme.dart';
 import 'package:avitus/presentation/pages/home/components/app_bar_search.dart';
 import 'package:avitus/presentation/pages/home/components/bottom_sheet.dart';
 import 'package:avitus/presentation/pages/home/components/list_container.dart';
-import 'package:avitus/presentation/routes/entity/routes.dart';
 import 'package:avitus/presentation/routes/index_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -82,7 +78,9 @@ class HomePage extends StatelessWidget {
                           child: ListContainer())),
                 ),
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push(Routes.addStore.path);
+                  },
                   backgroundColor: AppTheme.colors.primary,
                   child: Icon(Icons.add),
                 ),
