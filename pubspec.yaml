@@ -72,13 +72,15 @@ dependencies:
   url_launcher: ^6.1.9
   get_it: ^7.2.0
   intl: ^0.17.0
+  xml: ^6.0.0
+  dropdown_search: ^3.0.1
+ 
 
   # Navigation
   go_router: ^6.0.6
 
   # Device info
   device_info_plus: ^8.1.0
-
   network_info_plus: ^3.0.3
 
 dev_dependencies:
@@ -95,6 +97,7 @@ flutter:
     - assets/icons/
     - assets/translations/
     - assets/images/
+    - assets/info/
   
   
   # fonts:

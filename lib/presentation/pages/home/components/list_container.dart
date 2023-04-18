@@ -1,10 +1,15 @@
+import 'dart:io';
+
+import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class ListContainer extends StatelessWidget {
-  const ListContainer({super.key});
+  const ListContainer({super.key, required this.firm});
+
+  final Firm firm;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +33,20 @@ class ListContainer extends StatelessWidget {
                     border:
                         Border.all(color: AppTheme.colors.primary, width: 1.5),
                     borderRadius: BorderRadius.circular(10.r)),
+                child: firm.image == null
+                    ? Text("data")
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(10.r),
+                        child: Image.file(
+                          File(firm.image!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
               ),
               Gap(ScreenSize.w20),
               Expanded(
                 child: Text(
-                  "Umid Auto lizing",
+                  firm.name ?? '',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style:
@@ -51,7 +65,11 @@ class ListContainer extends StatelessWidget {
                   Text(tr('home.hisob_raqam'),
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
-                  Text("23w4232455", style: AppTheme.data.textTheme.headline4)
+                  Text(
+                      firm.accountNumber!.isEmpty
+                          ? tr('home.mavjud_emas')
+                          : firm.accountNumber!,
+                      style: AppTheme.data.textTheme.headline4)
                 ],
               ),
               SvgPicture.asset(
@@ -64,7 +82,11 @@ class ListContainer extends StatelessWidget {
                   Text(tr('home.shartnoma_raqam'),
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
-                  Text("23w4232455", style: AppTheme.data.textTheme.headline4)
+                  Text(
+                      firm.contractNumber!.isEmpty
+                          ? tr('home.mavjud_emas')
+                          : firm.contractNumber!,
+                      style: AppTheme.data.textTheme.headline4)
                 ],
               )
             ],
@@ -76,10 +98,10 @@ class ListContainer extends StatelessWidget {
               Gap(ScreenSize.w12),
               Expanded(
                 child: Text(
-                    "Farg‘ona viloyati, Uchko‘prik tumani,Navro‘rshox ko‘chasi,100-A uy",
+                    '${firm.provins == null ? tr('home.joylashuv') : firm.provins!.name} ${firm.districts == null ? '' : firm.districts!.name}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: AppTheme.data.textTheme.bodyText2),
+                    style: AppTheme.data.textTheme.bodyText1),
               )
             ],
           )

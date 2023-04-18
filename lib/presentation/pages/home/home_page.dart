@@ -69,13 +69,16 @@ class HomePage extends StatelessWidget {
                       ),
                 body: Padding(
                   padding: EdgeInsets.all(ScreenSize.w10),
-                  child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            context.push(Routes.storeInfo.path);
-                          },
-                          child: ListContainer())),
+                  child: RefreshIndicator(
+                    onRefresh: cubit.refresh,
+                    child: ListView.builder(
+                        itemCount: cubit.firms.length,
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              context.push(Routes.storeInfo.path);
+                            },
+                            child: ListContainer(firm: cubit.firms[index]))),
+                  ),
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {

@@ -6,7 +6,9 @@
     "tasdiqlash": "Тасдиқлаш",
     "bekor_qilish": "Бекор қилиш",
     "hisob_raqam": "Ҳисоб рақами:",
-    "shartnoma_raqam": "Шартнома рақами:"
+    "shartnoma_raqam": "Шартнома рақами:",
+    "mavjud_emas": "Мавжуд емас",
+    "joylashuv": "Жойлашув маълумотлари мавжуд емас"
   },
 
   "store":{
@@ -32,7 +34,15 @@
     "inn":"ИНН",
     "inn_kiriting":"ИНН ни киритинг",
     "kamera":"Камера",
-    "galereya":"Гелерея"
+    "galereya":"Гелерея",
+    "viloyat":"Вилоят",
+    "viloyat_tanlang":"Вилоятни танланг",
+    "tuman":"Туман",
+    "tuman_tanlang":"Туманни танланг",
+    "telefon_raqam":"Телефен рақамни киритинг",
+    "telefon":"Телефен рақам",
+    "qoshimcha":"Қўшимча телефен рақамни киритинг",
+    "saqlash":"Сақлаш"
   },
   "login": {
   
