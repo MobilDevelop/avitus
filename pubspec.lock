@@ -770,6 +770,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.7"
+  scroll_date_picker:
+    dependency: "direct main"
+    description:
+      name: scroll_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.7.0"
   sensors_plus:
     dependency: transitive
     description:

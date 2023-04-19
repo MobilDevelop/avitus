@@ -1,7 +1,6 @@
 // Created by Muhammed Tolkinov on 16-September-2022
 
-import 'package:avitus/infrasurtucture/di/injection_extansion.dart';
-import 'package:avitus/infrasurtucture/local_source/local_source.dart';
+import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/pages/add_store/add_store_page.dart';
 import 'package:avitus/presentation/pages/home/home_page.dart';
 import 'package:avitus/presentation/pages/login/login_page.dart';
@@ -9,7 +8,6 @@ import 'package:avitus/presentation/pages/store_info/store_info.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'entity/pages.dart';
 import 'entity/routes.dart';
 
 //final localSource = inject<LocalSource>();
@@ -47,7 +45,7 @@ final GoRouter router = GoRouter(
         path: Routes.storeInfo.path,
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
-          child: const StoreInfoPage(),
+          child: StoreInfoPage(firm: state.extra as Firm),
         ),
       ),
     ],

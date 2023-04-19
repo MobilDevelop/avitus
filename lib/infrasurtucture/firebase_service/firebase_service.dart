@@ -2,29 +2,44 @@
 import 'dart:convert';
 
 import 'package:avitus/infrasurtucture/models/firm_model.dart';
+import 'package:avitus/infrasurtucture/models/info.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class RTDBService {
   static final database = FirebaseDatabase.instance.reference();
-  static String getOperator(String name, int id) {
-    // String result = (UssdMalumotlari.choose(id, name));
-    return "result";
-  }
 
   static Future<List<Firm>> loadPostFirm() async {
     List items = [];
     Query _query = database.child('all_firm');
     var snapshot = await _query.once();
-    Map<String, dynamic> result =
-        jsonDecode(jsonEncode(snapshot.snapshot.value));
+    Map<String, dynamic> result = snapshot.snapshot.value == null
+        ? {}
+        : jsonDecode(jsonEncode(snapshot.snapshot.value));
 
     items = result.entries.map((item) => item.value).toList();
-
     return firmFromMap(items);
   }
 
   static Future<Stream<DatabaseEvent>> storePostFirm(Firm firm) async {
     database.child("all_firm").push().set(firm.toJson());
+    return database.onChildAdded;
+  }
+
+  static Future<List<Info>> loadPostInfo(String name) async {
+    List items = [];
+    Query _query = database.child(name);
+    var snapshot = await _query.once();
+    Map<String, dynamic> result = snapshot.snapshot.value == null
+        ? {}
+        : jsonDecode(jsonEncode(snapshot.snapshot.value));
+
+    items = result.entries.map((item) => item.value).toList();
+    return infoFromMap(items);
+  }
+
+  static Future<Stream<DatabaseEvent>> storePostInfo(
+      Info info, String name) async {
+    database.child(name).push().set(info.toJson());
     return database.onChildAdded;
   }
 

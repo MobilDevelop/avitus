@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:avitus/presentation/assets/theme/app_theme.dart';
 import 'package:avitus/presentation/pages/store_info/components/bottom_sheet_store.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 const double buttonSize = 60;
 

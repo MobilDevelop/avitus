@@ -45,8 +45,8 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<AppManagerCubit>(
               create: (context) => AppManagerCubit()..init()),
           BlocProvider(create: (context) => HomeCubit()),
-          BlocProvider(create: (context) => StoreInfoCubit()),
           BlocProvider(create: (context) => AddStoreCubit()),
+          BlocProvider(create: (context) => LoginCubit()),
           BlocProvider(create: (context) => LoginCubit()),
         ],
         child: ScreenUtilInit(

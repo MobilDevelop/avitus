@@ -4,10 +4,9 @@ abstract class AddStoreState {
 
 class AddStoreInitial extends AddStoreState {}
 
-class AddStoreEmpty extends AddStoreState {
+class AddStoreLoading extends AddStoreState {}
+
+class AddStoreSucces extends AddStoreState {
   String msg;
-
-  AddStoreEmpty({required this.msg});
+  AddStoreSucces(this.msg);
 }
-
-class AddStoreSucces extends AddStoreState {}

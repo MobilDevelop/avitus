@@ -4,28 +4,32 @@ import 'package:flutter_bounce/flutter_bounce.dart' as f_bounce;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class BorderButton extends StatelessWidget {
-  const BorderButton({
+class ColorButton extends StatelessWidget {
+  const ColorButton({
     Key? key,
     required this.onPressed,
     required this.text,
     this.width,
     this.borderColor,
     this.icon,
+    this.backgroundColor,
   }) : super(key: key);
 
   final VoidCallback onPressed;
   final String text;
   final double? width;
   final Color? borderColor;
+  final Color? backgroundColor;
   final String? icon;
 
   @override
   Widget build(BuildContext context) {
     Widget current = Text(
       text,
-      style: AppTheme.data.textTheme.subtitle2
-          ?.copyWith(color: borderColor ?? AppTheme.colors.text900),
+      style: AppTheme.data.textTheme.subtitle2?.copyWith(
+          color: backgroundColor == null
+              ? AppTheme.colors.primary
+              : AppTheme.colors.secondary),
     );
 
     if (icon != null) {
@@ -47,13 +51,14 @@ class BorderButton extends StatelessWidget {
       duration: const Duration(milliseconds: 150),
       child: Container(
         width: width,
+        margin: EdgeInsets.symmetric(horizontal: ScreenSize.w4),
         padding: EdgeInsets.symmetric(
             horizontal: icon != null ? 0 : ScreenSize.w24,
             vertical: ScreenSize.h12),
         decoration: BoxDecoration(
-            color: borderColor == null
-                ? AppTheme.colors.primary.withOpacity(0.2)
-                : borderColor!.withOpacity(0.2),
+            color: backgroundColor == null
+                ? AppTheme.colors.secondary
+                : backgroundColor,
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(color: borderColor ?? AppTheme.colors.primary)),
         alignment: Alignment.center,

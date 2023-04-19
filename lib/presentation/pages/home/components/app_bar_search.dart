@@ -8,10 +8,12 @@ class AppBarSearch extends StatelessWidget implements PreferredSizeWidget {
     required this.controller,
     required this.ontapClear,
     required this.ontapBack,
+    required this.onChaged,
   });
   final TextEditingController controller;
   final VoidCallback ontapClear;
   final VoidCallback ontapBack;
+  final Function onChaged;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -25,6 +27,9 @@ class AppBarSearch extends StatelessWidget implements PreferredSizeWidget {
         width: double.infinity,
         height: 45,
         child: TextField(
+          controller: controller,
+          onChanged: (value) => onChaged(value),
+          autofocus: true,
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
           decoration: InputDecoration(
@@ -33,11 +38,6 @@ class AppBarSearch extends StatelessWidget implements PreferredSizeWidget {
                   icon: SvgPicture.asset(
                     AppIcons.left,
                     color: AppTheme.colors.black,
-                  )),
-              suffixIcon: IconButton(
-                  onPressed: () => ontapClear(),
-                  icon: SvgPicture.asset(
-                    AppIcons.close,
                   )),
               contentPadding: const EdgeInsets.only(top: 15),
               enabledBorder: OutlineInputBorder(

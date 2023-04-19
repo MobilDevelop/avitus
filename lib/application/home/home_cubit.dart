@@ -1,14 +1,6 @@
 // ignore_for_file: unused_field
 
-import 'dart:io';
-
-import 'package:avitus/application/home/home_state.dart';
-import 'package:avitus/infrasurtucture/firebase_service/firebase_service.dart';
-import 'package:avitus/infrasurtucture/models/firm_model.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'home_index.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial()) {
@@ -18,11 +10,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool searchShow = false;
   final fb = FirebaseDatabase.instance;
-  final auth = FirebaseDatabase.instance.ref("Firm");
   List<Firm> firms = [];
+  List<Firm> searchFirms = [];
 
   init() async {
     firms = await RTDBService.loadPostFirm();
+    searchFirms = firms;
+    searchFirms.sort(
+      (a, b) => a.id.compareTo(b.id),
+    );
     emit(HomeInitial());
   }
 
@@ -30,8 +26,26 @@ class HomeCubit extends Cubit<HomeState> {
     init();
   }
 
+  void searchFirm() {
+    searchFirms.clear();
+    String searchText = searchController.text.trim();
+    for (Firm item in firms) {
+      if (item.name!.length >= searchText.length) {
+        if (item.name!.substring(0, searchText.length) == searchText) {
+          searchFirms.add(item);
+        }
+      }
+    }
+    emit(HomeInitial());
+  }
+
   void showSearch() {
     searchShow = !searchShow;
-    emit(HomeInitial());
+    if (!searchShow) {
+      searchController.clear();
+      searchFirm();
+    } else {
+      emit(HomeInitial());
+    }
   }
 }

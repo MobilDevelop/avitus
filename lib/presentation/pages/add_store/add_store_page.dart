@@ -1,10 +1,10 @@
 import 'package:avitus/application/add_store/add_store_cubit.dart';
 import 'package:avitus/application/add_store/add_store_state.dart';
-import 'package:avitus/infrasurtucture/models/provins.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
-import 'package:avitus/presentation/components/button/border_button.dart';
+import 'package:avitus/presentation/components/button/main_button.dart';
 import 'package:avitus/presentation/components/text_field.dart';
 import 'package:avitus/presentation/pages/add_store/components/drop_down.dart';
+import 'package:avitus/presentation/routes/index_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,24 +17,19 @@ class AddStore extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AddStoreCubit, AddStoreState>(
         listener: (context, state) {
-      if (state is AddStoreEmpty) {
-        print(state.msg);
+      if (state is AddStoreSucces) {
+        context.go(Routes.home.path);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppTheme.colors.primary,
             content: Text(
               state.msg,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-              ),
+              textAlign: TextAlign.center,
+              style: AppTheme.data.textTheme.headline4
+                  ?.copyWith(color: AppTheme.colors.secondary),
             ),
           ),
         );
-      }
-      if (state is AddStoreSucces) {
-        print("object");
       }
     }, child: Builder(builder: (context) {
       final cubit = context.read<AddStoreCubit>();
@@ -144,13 +139,17 @@ class AddStore extends StatelessWidget {
                         chooseType: false,
                         labelText: tr('addStore.telefon'),
                         hinText: tr('addStore.qoshimcha')),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          bottom: ScreenSize.h18, top: ScreenSize.h24),
-                      child: BorderButton(
-                          onPressed: cubit.addFirm,
-                          text: tr('addStore.saqlash')),
-                    )
+                    BlocBuilder<AddStoreCubit, AddStoreState>(
+                        builder: (_, state) => MainButton(
+                              onPressed: cubit.addFirm,
+                              text: tr('addStore.saqlash'),
+                              margin: EdgeInsets.only(
+                                top: 10.h,
+                                bottom:
+                                    MediaQuery.of(context).viewPadding.bottom,
+                              ),
+                              showLoading: (state is AddStoreLoading) && true,
+                            ))
                   ],
                 ),
               ],

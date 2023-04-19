@@ -33,8 +33,14 @@ class ListContainer extends StatelessWidget {
                     border:
                         Border.all(color: AppTheme.colors.primary, width: 1.5),
                     borderRadius: BorderRadius.circular(10.r)),
-                child: firm.image == null
-                    ? Text("data")
+                child: firm.image!.isEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(10.r),
+                        child: Image.asset(
+                          AppIcons.noImage,
+                          fit: BoxFit.cover,
+                        ),
+                      )
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
                         child: Image.file(
@@ -46,7 +52,7 @@ class ListContainer extends StatelessWidget {
               Gap(ScreenSize.w20),
               Expanded(
                 child: Text(
-                  firm.name ?? '',
+                  firm.name!.isEmpty ? tr('home.empty_name') : firm.name!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style:

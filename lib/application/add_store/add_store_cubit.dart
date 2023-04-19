@@ -1,15 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:avitus/application/add_store/add_store_state.dart';
-import 'package:avitus/infrasurtucture/firebase_service/firebase_service.dart';
-import 'package:avitus/infrasurtucture/models/districts.dart';
-import 'package:avitus/infrasurtucture/models/firm_model.dart';
-import 'package:avitus/infrasurtucture/models/provins.dart';
-import 'package:avitus/presentation/assets/asset_index.dart';
+import 'add_store_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddStoreCubit extends Cubit<AddStoreState> {
   AddStoreCubit() : super(AddStoreInitial()) {
@@ -41,6 +32,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   final phone3Focus = FocusNode();
 
   late File image;
+  bool nullImage = true;
   bool chek = false;
 
   List<Provins> provins = [];
@@ -50,32 +42,57 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   Provins? selectProvins;
   Districts? selectDistrict;
 
+  var response;
+
   addFirm() async {
+    List<Firm> firms = await RTDBService.loadPostFirm();
+    firms.sort(
+      (a, b) => a.id.compareTo(b.id),
+    );
+    emit(AddStoreLoading());
     String name = nameController.text.trim();
     String account = accountNumberController.text.trim();
     String contract = contractNumberController.text.trim();
+    String imagePath = nullImage ? "" : image.path;
     String nfo = NFOController.text.trim();
     String inn = INNController.text.trim();
     String phone1 = phone1Controller.text.trim();
     String phone2 = phone2Controller.text.trim();
     String phone3 = phone3Controller.text.trim();
 
-    Firm firm = Firm(
-        id: 1,
-        name: name,
-        image: image.path,
-        provins: selectProvins,
-        districts: selectDistrict,
-        accountNumber: account,
-        contractNumber: contract,
-        nfo: nfo,
-        inn: inn,
-        phone1: phone1,
-        phone2: phone2,
-        phone3: phone3);
+    if (firms.isEmpty) {
+      Firm firm = Firm(
+          id: 0,
+          name: name,
+          image: imagePath,
+          provins: selectProvins,
+          districts: selectDistrict,
+          accountNumber: account,
+          contractNumber: contract,
+          nfo: nfo,
+          inn: inn,
+          phone1: phone1,
+          phone2: phone2,
+          phone3: phone3);
+      response = await RTDBService.storePostFirm(firm);
+    } else {
+      Firm firm = Firm(
+          id: firms.last.id + 1,
+          name: name,
+          image: imagePath,
+          provins: selectProvins,
+          districts: selectDistrict,
+          accountNumber: account,
+          contractNumber: contract,
+          nfo: nfo,
+          inn: inn,
+          phone1: phone1,
+          phone2: phone2,
+          phone3: phone3);
+      response = await RTDBService.storePostFirm(firm);
+    }
 
-    RTDBService.storePostFirm(firm);
-    print("saqlandi");
+    emit(AddStoreSucces(tr('addStore.saqlandi')));
   }
 
   setProvins(Provins setProvins) {
@@ -113,12 +130,14 @@ class AddStoreCubit extends Cubit<AddStoreState> {
       if (ximage != null) {
         image = File(ximage.path);
         chek = true;
+        nullImage = false;
       }
     } else {
       XFile? ximage = await picker.pickImage(source: ImageSource.camera);
       if (ximage != null) {
         image = File(ximage.path);
         chek = true;
+        nullImage = false;
       }
     }
     Navigator.pop(context);

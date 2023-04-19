@@ -14,4 +14,5 @@ class AppIcons {
 
   static const String down = 'assets/images/down.png';
   static const String up = 'assets/images/up.png';
+  static const String noImage = 'assets/images/noImage.jpeg';
 }

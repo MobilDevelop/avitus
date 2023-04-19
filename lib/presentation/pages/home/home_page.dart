@@ -46,6 +46,7 @@ class HomePage extends StatelessWidget {
                           cubit.showSearch();
                         },
                         ontapClear: () {},
+                        onChaged: (value) => cubit.searchFirm(),
                       )
                     : AppBar(
                         elevation: 0,
@@ -72,12 +73,14 @@ class HomePage extends StatelessWidget {
                   child: RefreshIndicator(
                     onRefresh: cubit.refresh,
                     child: ListView.builder(
-                        itemCount: cubit.firms.length,
+                        itemCount: cubit.searchFirms.length,
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                              context.push(Routes.storeInfo.path);
+                              context.push(Routes.storeInfo.path,
+                                  extra: cubit.searchFirms[index]);
                             },
-                            child: ListContainer(firm: cubit.firms[index]))),
+                            child:
+                                ListContainer(firm: cubit.searchFirms[index]))),
                   ),
                 ),
                 floatingActionButton: FloatingActionButton(

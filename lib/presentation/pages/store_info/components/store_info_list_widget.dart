@@ -1,17 +1,15 @@
+import 'package:avitus/infrasurtucture/models/info.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class StoreInfoListWidget extends StatelessWidget {
-  const StoreInfoListWidget({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
-  final int index;
+  const StoreInfoListWidget({Key? key, required this.item}) : super(key: key);
+  final Info item;
   @override
   Widget build(BuildContext context) {
-    if (index % 2 == 0) {
+    if (item.type) {
       return payTime();
     }
     return inputTime();
