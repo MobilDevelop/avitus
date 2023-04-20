@@ -16,12 +16,19 @@ class RTDBService {
         ? {}
         : jsonDecode(jsonEncode(snapshot.snapshot.value));
 
-    items = result.entries.map((item) => item.value).toList();
+    items = result.entries.map((item) {
+      return {'key': item.key, 'value': item.value};
+    }).toList();
     return firmFromMap(items);
   }
 
   static Future<Stream<DatabaseEvent>> storePostFirm(Firm firm) async {
     database.child("all_firm").push().set(firm.toJson());
+    return database.onChildAdded;
+  }
+
+  static Future<Stream<DatabaseEvent>> storePutFirm(Firm firm) async {
+    database.child("all_firm").child(firm.key).update(firm.toJson());
     return database.onChildAdded;
   }
 

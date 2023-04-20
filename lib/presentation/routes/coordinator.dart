@@ -37,7 +37,7 @@ final GoRouter router = GoRouter(
         path: Routes.addStore.path,
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
-          child: const AddStore(),
+          child: AddStore(firm: state.extra as Firm?),
         ),
       ),
       GoRoute(

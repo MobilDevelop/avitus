@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AddStoreCubit extends Cubit<AddStoreState> {
-  AddStoreCubit() : super(AddStoreInitial()) {
-    init();
+  AddStoreCubit(Firm? firm) : super(AddStoreInitial()) {
+    init(firm);
   }
 
   final nameController = TextEditingController();
@@ -42,6 +42,45 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   Provins? selectProvins;
   Districts? selectDistrict;
 
+  bool enebled = true;
+
+  chooseFirm(Firm? firm) {
+    if (firm == null) {
+      addFirm();
+    } else {
+      editFirm(firm);
+    }
+  }
+
+  editFirm(Firm firm) {
+    String name = nameController.text.trim();
+    String account = accountNumberController.text.trim();
+    String contract = contractNumberController.text.trim();
+    String imagePath = nullImage ? "" : image.path;
+    String nfo = NFOController.text.trim();
+    String inn = INNController.text.trim();
+    String phone1 = phone1Controller.text.trim();
+    String phone2 = phone2Controller.text.trim();
+    String phone3 = phone3Controller.text.trim();
+
+    Firm editFirm = Firm(
+        id: firm.id,
+        key: firm.key,
+        name: name,
+        image: imagePath,
+        provins: selectProvins,
+        districts: selectDistrict,
+        accountNumber: account,
+        contractNumber: contract,
+        nfo: nfo,
+        inn: inn,
+        phone1: phone1,
+        phone2: phone2,
+        phone3: phone3);
+    RTDBService.storePutFirm(editFirm);
+    emit(AddStoreSucces(tr('addStore.yangilandi')));
+  }
+
   addFirm() async {
     List<Firm> firms = await RTDBService.loadPostFirm();
     firms.sort(
@@ -61,6 +100,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     if (firms.isEmpty) {
       Firm firm = Firm(
           id: 0,
+          key: '',
           name: name,
           image: imagePath,
           provins: selectProvins,
@@ -76,6 +116,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     } else {
       Firm firm = Firm(
           id: firms.last.id + 1,
+          key: '',
           name: name,
           image: imagePath,
           provins: selectProvins,
@@ -93,16 +134,18 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     emit(AddStoreSucces(tr('addStore.saqlandi')));
   }
 
-  setProvins(Provins setProvins) {
-    selectProvins = setProvins;
-    selectDistrict = null;
-    districts.clear();
-    for (Districts element in allDistricts) {
-      if (element.regionId == selectProvins!.id) {
-        districts.add(element);
+  setProvins(Provins? setProvins) {
+    if (setProvins != null) {
+      selectProvins = setProvins;
+      selectDistrict = null;
+      districts.clear();
+      for (Districts element in allDistricts) {
+        if (element.regionId == selectProvins!.id) {
+          districts.add(element);
+        }
       }
+      emit(AddStoreInitial());
     }
-    emit(AddStoreInitial());
   }
 
   setDistrict(Districts setDistrict) {
@@ -110,7 +153,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     emit(AddStoreInitial());
   }
 
-  init() async {
+  init(Firm? firm) async {
     final String response =
         await rootBundle.loadString('assets/info/provins.json');
 
@@ -118,6 +161,30 @@ class AddStoreCubit extends Cubit<AddStoreState> {
 
     provins = provinsFromMap(data['provins']);
     allDistricts = districtsFromMap(data['districts']);
+    if (firm != null) {
+      nameController.text = firm.name!;
+      accountNumberController.text = firm.accountNumber!;
+      contractNumberController.text = firm.contractNumber!;
+      NFOController.text = firm.nfo!;
+      INNController.text = firm.inn!;
+      phone1Controller.text = firm.phone1!;
+      phone2Controller.text = firm.phone2!;
+      phone3Controller.text = firm.phone3!;
+      selectProvins = firm.provins;
+      if (firm.image!.isNotEmpty) {
+        image = File(firm.image!);
+        nullImage = false;
+        chek = true;
+      }
+      enebled = false;
+      setProvins(firm.provins);
+      selectDistrict = firm.districts;
+    }
+    emit(AddStoreInitial());
+  }
+
+  setEnebled() {
+    enebled = !enebled;
     emit(AddStoreInitial());
   }
 

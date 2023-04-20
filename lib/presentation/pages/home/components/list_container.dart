@@ -71,11 +71,16 @@ class ListContainer extends StatelessWidget {
                   Text(tr('home.hisob_raqam'),
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
-                  Text(
-                      firm.accountNumber!.isEmpty
-                          ? tr('home.mavjud_emas')
-                          : firm.accountNumber!,
-                      style: AppTheme.data.textTheme.headline4)
+                  Container(
+                    width: 120.w,
+                    child: Text(
+                        firm.accountNumber!.isEmpty
+                            ? tr('home.mavjud_emas')
+                            : firm.accountNumber!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.data.textTheme.headline4),
+                  )
                 ],
               ),
               SvgPicture.asset(
@@ -88,11 +93,16 @@ class ListContainer extends StatelessWidget {
                   Text(tr('home.shartnoma_raqam'),
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
-                  Text(
-                      firm.contractNumber!.isEmpty
-                          ? tr('home.mavjud_emas')
-                          : firm.contractNumber!,
-                      style: AppTheme.data.textTheme.headline4)
+                  Container(
+                    width: 120.w,
+                    child: Text(
+                        firm.contractNumber!.isEmpty
+                            ? tr('home.mavjud_emas')
+                            : firm.contractNumber!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.data.textTheme.headline4),
+                  )
                 ],
               )
             ],

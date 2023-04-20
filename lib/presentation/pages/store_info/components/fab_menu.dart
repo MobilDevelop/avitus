@@ -1,14 +1,18 @@
 import 'dart:math';
 
+import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/assets/theme/app_theme.dart';
 import 'package:avitus/presentation/pages/store_info/components/bottom_sheet_store.dart';
+import 'package:avitus/presentation/routes/entity/routes.dart';
+import 'package:avitus/presentation/routes/index_routes.dart';
 import 'package:flutter/material.dart';
 
 const double buttonSize = 60;
 
 class FabMenu extends StatefulWidget {
-  const FabMenu({super.key, required this.idName});
+  const FabMenu({super.key, required this.idName, required this.firm});
   final String idName;
+  final Firm firm;
   @override
   State<FabMenu> createState() => _FabMenuState();
 }
@@ -61,7 +65,9 @@ class _FabMenuState extends State<FabMenu> with SingleTickerProviderStateMixin {
                   BottomShetStore.bottomSheetRemove(context, widget.idName);
                 } else if (icon.codePoint == 57415) {
                   BottomShetStore.bottomSheetAdd(context, widget.idName);
-                } else {}
+                } else {
+                  context.push(Routes.addStore.path, extra: widget.firm);
+                }
               } else {
                 controller.forward();
               }

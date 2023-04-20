@@ -17,7 +17,21 @@ class StoreInfoPage extends StatelessWidget {
       create: (context) => StoreInfoCubit(firm.id.toString()),
       child: BlocListener<StoreInfoCubit, StoreInfoState>(
         listener: (context, state) {
-          if (state is StoreInfoSucces) {}
+          if (state is StoreInfoSucces) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: AppTheme.colors.primary,
+                content: Text(
+                  "salom",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            );
+          }
           if (state is StoreInfoError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -100,7 +114,8 @@ class StoreInfoPage extends StatelessWidget {
                       ],
                     )),
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-            floatingActionButton: FabMenu(idName: firm.id.toString()),
+            floatingActionButton:
+                FabMenu(idName: firm.id.toString(), firm: firm),
           );
         }),
       ),

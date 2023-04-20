@@ -8,6 +8,7 @@ List<Firm> firmFromMap(List list) =>
 
 class Firm {
   int id;
+  String key;
   String? name;
   String? image;
   Provins? provins;
@@ -22,6 +23,7 @@ class Firm {
 
   Firm({
     required this.id,
+    required this.key,
     required this.name,
     required this.image,
     required this.provins,
@@ -36,24 +38,27 @@ class Firm {
   });
 
   factory Firm.fromJson(Map<String, dynamic> json) => Firm(
-      id: json['id'],
-      name: json['name'],
-      image: json['image'],
-      provins:
-          json['provins'] == null ? null : Provins.fromJson(json['provins']),
-      districts: json['districts'] == null
+      id: json['value']['id'],
+      key: json['key'],
+      name: json['value']['name'],
+      image: json['value']['image'],
+      provins: json['value']['provins'] == null
           ? null
-          : Districts.fromJson(json['districts']),
-      accountNumber: json['accountNumber'],
-      contractNumber: json['contractNumber'],
-      nfo: json['nfo'],
-      inn: json['inn'],
-      phone1: json['phone1'],
-      phone2: json['phone2'],
-      phone3: json['phone3']);
+          : Provins.fromJson(json['value']['provins']),
+      districts: json['value']['districts'] == null
+          ? null
+          : Districts.fromJson(json['value']['districts']),
+      accountNumber: json['value']['accountNumber'],
+      contractNumber: json['value']['contractNumber'],
+      nfo: json['value']['nfo'],
+      inn: json['value']['inn'],
+      phone1: json['value']['phone1'],
+      phone2: json['value']['phone2'],
+      phone3: json['value']['phone3']);
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'key': key,
         'name': name,
         'image': image,
         'provins': provins?.toJson(),

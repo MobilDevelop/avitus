@@ -11,13 +11,15 @@ class DropDownProvins extends StatelessWidget {
       required this.selected,
       required this.onChanged,
       required this.label,
-      required this.hint});
+      required this.hint,
+      required this.enebled});
 
   final List<Provins> items;
   final Provins? selected;
   final Function onChanged;
   final String label;
   final String hint;
+  final bool enebled;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class DropDownProvins extends StatelessWidget {
       child: DropdownSearch<Provins>(
         mode: Mode.MENU,
         items: items,
+        enabled: enebled,
         dropdownSearchDecoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 15.h, horizontal: 17.w),
@@ -38,6 +41,10 @@ class DropDownProvins extends StatelessWidget {
               borderSide:
                   BorderSide(width: 1.5, color: AppTheme.colors.primary)),
           focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+                  BorderSide(width: 1.5, color: AppTheme.colors.primary)),
+          disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
                   BorderSide(width: 1.5, color: AppTheme.colors.primary)),
@@ -61,13 +68,15 @@ class DropDownDistricts extends StatelessWidget {
       required this.selected,
       required this.onChanged,
       required this.label,
-      required this.hint});
+      required this.hint,
+      required this.enebled});
 
   final List<Districts> items;
   final Districts? selected;
   final Function onChanged;
   final String label;
   final String hint;
+  final bool enebled;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +85,7 @@ class DropDownDistricts extends StatelessWidget {
       child: DropdownSearch<Districts>(
         mode: Mode.MENU,
         items: items,
+        enabled: enebled,
         dropdownSearchDecoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 15.h, horizontal: 17.w),
@@ -88,6 +98,10 @@ class DropDownDistricts extends StatelessWidget {
               borderSide:
                   BorderSide(width: 1.5, color: AppTheme.colors.primary)),
           focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+                  BorderSide(width: 1.5, color: AppTheme.colors.primary)),
+          disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
                   BorderSide(width: 1.5, color: AppTheme.colors.primary)),

@@ -11,6 +11,7 @@ class AppIcons {
   static const String nomer = 'assets/icons/nomer.svg';
   static const String camera = 'assets/icons/camera.svg';
   static const String close = 'assets/icons/close.svg';
+  static const String notification = 'assets/icons/notification.svg';
 
   static const String down = 'assets/images/down.png';
   static const String up = 'assets/images/up.png';

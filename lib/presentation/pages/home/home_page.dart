@@ -60,7 +60,8 @@ class HomePage extends StatelessWidget {
                                   icon: SvgPicture.asset(AppIcons.search)),
                               IconButton(
                                   onPressed: () {},
-                                  icon: SvgPicture.asset(AppIcons.filter)),
+                                  icon:
+                                      SvgPicture.asset(AppIcons.notification)),
                             ],
                           )
                         ],
@@ -82,7 +83,7 @@ class HomePage extends StatelessWidget {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    context.push(Routes.addStore.path);
+                    context.push(Routes.addStore.path, extra: null);
                   },
                   backgroundColor: AppTheme.colors.primary,
                   child: Icon(Icons.add),
