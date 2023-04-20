@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 const double buttonSize = 60;
 
 class FabMenu extends StatefulWidget {
-  const FabMenu({super.key});
-
+  const FabMenu({super.key, required this.idName});
+  final String idName;
   @override
   State<FabMenu> createState() => _FabMenuState();
 }
@@ -58,9 +58,9 @@ class _FabMenuState extends State<FabMenu> with SingleTickerProviderStateMixin {
                 controller.reverse();
                 print(icon.codePoint);
                 if (icon.codePoint == 58646) {
-                  BottomShetStore.bottomSheetRemove(context);
+                  BottomShetStore.bottomSheetRemove(context, widget.idName);
                 } else if (icon.codePoint == 57415) {
-                  BottomShetStore.bottomSheetAdd(context);
+                  BottomShetStore.bottomSheetAdd(context, widget.idName);
                 } else {}
               } else {
                 controller.forward();

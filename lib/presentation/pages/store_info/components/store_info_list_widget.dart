@@ -1,3 +1,4 @@
+import 'package:avitus/infrasurtucture/helper_method/helper_method.dart';
 import 'package:avitus/infrasurtucture/models/info.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class StoreInfoListWidget extends StatelessWidget {
   final Info item;
   @override
   Widget build(BuildContext context) {
-    if (item.type) {
+    if (!item.type) {
       return payTime();
     }
     return inputTime();
@@ -39,7 +40,10 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.miqdori'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.w4),
-                    Text("120 mln", style: AppTheme.data.textTheme.headline4),
+                    Text(
+                        HelperMedhod.toProcessCost(item.quantity.toString()) +
+                            tr('store.som'),
+                        style: AppTheme.data.textTheme.headline4),
                   ],
                 ),
                 Row(
@@ -54,7 +58,8 @@ class StoreInfoListWidget extends StatelessWidget {
                       children: [
                         SvgPicture.asset(AppIcons.nomer, height: 16.h),
                         Gap(ScreenSize.h4),
-                        Text("12", style: AppTheme.data.textTheme.headline4)
+                        Text((item.id + 1).toString(),
+                            style: AppTheme.data.textTheme.headline4)
                       ],
                     ),
                   ],
@@ -70,7 +75,8 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.tolov_sanasi'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.h4),
-                    Text("11.04.2023", style: AppTheme.data.textTheme.headline4)
+                    Text(item.paymentDate,
+                        style: AppTheme.data.textTheme.headline4)
                   ],
                 ),
                 SvgPicture.asset(
@@ -83,7 +89,8 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.eslatma_sanasi'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.h4),
-                    Text("11.07.2023", style: AppTheme.data.textTheme.headline4)
+                    Text(item.dateOfNotice,
+                        style: AppTheme.data.textTheme.headline4)
                   ],
                 )
               ],
@@ -116,7 +123,10 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.miqdori'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.w4),
-                    Text("120 mln", style: AppTheme.data.textTheme.headline4),
+                    Text(
+                        HelperMedhod.toProcessCost(item.quantity.toString()) +
+                            tr('store.som'),
+                        style: AppTheme.data.textTheme.headline4),
                   ],
                 ),
                 Row(
@@ -131,7 +141,8 @@ class StoreInfoListWidget extends StatelessWidget {
                       children: [
                         SvgPicture.asset(AppIcons.nomer, height: 16.h),
                         Gap(ScreenSize.h4),
-                        Text("12", style: AppTheme.data.textTheme.headline4)
+                        Text((item.id + 1).toString(),
+                            style: AppTheme.data.textTheme.headline4)
                       ],
                     ),
                   ],
@@ -155,7 +166,8 @@ class StoreInfoListWidget extends StatelessWidget {
                         style: AppTheme.data.textTheme.headline2),
                   ],
                 ),
-                Text("Naqd", style: AppTheme.data.textTheme.headline4),
+                Text(item.paymentType,
+                    style: AppTheme.data.textTheme.headline4),
               ],
             ),
             Row(
@@ -167,7 +179,8 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.tolov_sanasi'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.h4),
-                    Text("11.04.2023", style: AppTheme.data.textTheme.headline4)
+                    Text(item.paymentDate,
+                        style: AppTheme.data.textTheme.headline4)
                   ],
                 ),
                 SvgPicture.asset(
@@ -180,7 +193,8 @@ class StoreInfoListWidget extends StatelessWidget {
                     Text(tr('store.tolov_vaqti'),
                         style: AppTheme.data.textTheme.headline2),
                     Gap(ScreenSize.h4),
-                    Text("11:25:23", style: AppTheme.data.textTheme.headline4)
+                    Text(item.paymentTime,
+                        style: AppTheme.data.textTheme.headline4)
                   ],
                 )
               ],

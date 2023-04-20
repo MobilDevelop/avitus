@@ -42,8 +42,6 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   Provins? selectProvins;
   Districts? selectDistrict;
 
-  var response;
-
   addFirm() async {
     List<Firm> firms = await RTDBService.loadPostFirm();
     firms.sort(
@@ -74,7 +72,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
           phone1: phone1,
           phone2: phone2,
           phone3: phone3);
-      response = await RTDBService.storePostFirm(firm);
+      RTDBService.storePostFirm(firm);
     } else {
       Firm firm = Firm(
           id: firms.last.id + 1,
@@ -89,7 +87,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
           phone1: phone1,
           phone2: phone2,
           phone3: phone3);
-      response = await RTDBService.storePostFirm(firm);
+      RTDBService.storePostFirm(firm);
     }
 
     emit(AddStoreSucces(tr('addStore.saqlandi')));

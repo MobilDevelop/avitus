@@ -2,7 +2,6 @@ import 'package:avitus/application/home/home_cubit.dart';
 import 'package:avitus/application/home/home_state.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
 import 'package:avitus/presentation/pages/home/components/app_bar_search.dart';
-import 'package:avitus/presentation/pages/home/components/bottom_sheet.dart';
 import 'package:avitus/presentation/pages/home/components/list_container.dart';
 import 'package:avitus/presentation/routes/index_routes.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class HomePage extends StatelessWidget {
                           cubit.showSearch();
                         },
                         ontapClear: () {},
-                        onChaged: (value) => cubit.searchFirm(),
+                        onChaged: (value) => cubit.init(),
                       )
                     : AppBar(
                         elevation: 0,
@@ -60,9 +59,7 @@ class HomePage extends StatelessWidget {
                                   onPressed: cubit.showSearch,
                                   icon: SvgPicture.asset(AppIcons.search)),
                               IconButton(
-                                  onPressed: () {
-                                    BottomShettHome.bottomSheetHome(context);
-                                  },
+                                  onPressed: () {},
                                   icon: SvgPicture.asset(AppIcons.filter)),
                             ],
                           )

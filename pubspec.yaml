@@ -74,7 +74,7 @@ dependencies:
   intl: ^0.17.0
   xml: ^6.0.0
   dropdown_search: ^3.0.1
-  scroll_date_picker: ^3.7.0
+  flutter_rounded_date_picker: ^3.0.2
  
 
   # Navigation

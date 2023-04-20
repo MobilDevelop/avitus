@@ -15,18 +15,10 @@ class HomeCubit extends Cubit<HomeState> {
 
   init() async {
     firms = await RTDBService.loadPostFirm();
-    searchFirms = firms;
-    searchFirms.sort(
+    firms.sort(
       (a, b) => a.id.compareTo(b.id),
     );
-    emit(HomeInitial());
-  }
-
-  Future<Null> refresh() async {
-    init();
-  }
-
-  void searchFirm() {
+    firms.reversed.toList();
     searchFirms.clear();
     String searchText = searchController.text.trim();
     for (Firm item in firms) {
@@ -39,11 +31,15 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeInitial());
   }
 
+  Future<Null> refresh() async {
+    init();
+  }
+
   void showSearch() {
     searchShow = !searchShow;
     if (!searchShow) {
       searchController.clear();
-      searchFirm();
+      init();
     } else {
       emit(HomeInitial());
     }
