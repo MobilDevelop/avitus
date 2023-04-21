@@ -14,6 +14,15 @@ class HelperMedhod {
     return time;
   }
 
+  static int dateCalculate(String date) {
+    final DateFormat displayFormater = DateFormat('dd.MM.yyyy');
+    final DateTime displayDate = displayFormater.parse(date);
+    final date2 = DateTime.now();
+    int difference = displayDate.difference(date2).inDays;
+
+    return difference;
+  }
+
   static String chooseType(int index) {
     switch (index) {
       case 1:

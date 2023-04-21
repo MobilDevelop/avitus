@@ -44,8 +44,8 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
     }
   }
 
-  void addInfo(bool type, String idName) async {
-    List<Info> test = await RTDBService.loadPostInfo(idName);
+  void addInfo(bool type, Firm firm) async {
+    List<Info> test = await RTDBService.loadPostInfo(firm.id.toString());
     test.sort(
       (a, b) => a.id.compareTo(b.id),
     );
@@ -68,23 +68,25 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
     if (test.isEmpty) {
       Info info = Info(
           id: 0,
+          name: firm.name!,
           type: type,
           quantity: int.parse(quantity),
           paymentType: HelperMedhod.chooseType(typeIndex),
           paymentDate: date,
           paymentTime: time,
           dateOfNotice: noticeDate);
-      await RTDBService.storePostInfo(info, idName);
+      await RTDBService.storePostInfo(info, firm.id.toString());
     } else {
       Info info = Info(
           id: test.last.id + 1,
+          name: firm.name!,
           type: type,
           quantity: int.parse(quantity),
           paymentType: HelperMedhod.chooseType(typeIndex),
           paymentDate: date,
           paymentTime: time,
           dateOfNotice: noticeDate);
-      await RTDBService.storePostInfo(info, idName);
+      await RTDBService.storePostInfo(info, firm.id.toString());
     }
     emit(StoreInfoSucces());
   }

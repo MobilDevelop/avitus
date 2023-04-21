@@ -34,7 +34,7 @@ class RTDBService {
 
   static Future<List<Info>> loadPostInfo(String name) async {
     List items = [];
-    Query _query = database.child(name);
+    Query _query = database.child('transfers').child(name);
     var snapshot = await _query.once();
     Map<String, dynamic> result = snapshot.snapshot.value == null
         ? {}
@@ -44,9 +44,22 @@ class RTDBService {
     return infoFromMap(items);
   }
 
+  static Future<List<Info>> loadPosAlltInfo() async {
+    List items = [];
+    Query _query = database.child('transfers');
+    var snapshot = await _query.once();
+    List result = snapshot.snapshot.value == null
+        ? {}
+        : jsonDecode(jsonEncode(snapshot.snapshot.value));
+    for (var element in result) {
+      items += element.entries.map((item) => item.value).toList();
+    }
+    return infoFromMap(items);
+  }
+
   static Future<Stream<DatabaseEvent>> storePostInfo(
       Info info, String name) async {
-    database.child(name).push().set(info.toJson());
+    database.child('transfers').child(name).push().set(info.toJson());
     return database.onChildAdded;
   }
 

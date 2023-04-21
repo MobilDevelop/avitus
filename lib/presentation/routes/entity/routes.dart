@@ -16,6 +16,10 @@ class Routes implements Coordinate {
     name: 'home_page',
     path: '/home',
   );
+  static const notification = Routes._(
+    name: 'notification_page',
+    path: '/notification',
+  );
   static const addStore = Routes._(
     name: 'add_store_page',
     path: '/add_store',

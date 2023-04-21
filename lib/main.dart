@@ -4,6 +4,7 @@ import 'package:avitus/application/add_store/add_store_cubit.dart';
 import 'package:avitus/application/app_manager/app_manager_cubit.dart';
 import 'package:avitus/application/home/home_cubit.dart';
 import 'package:avitus/application/login/login_cubit.dart';
+import 'package:avitus/application/notification/notification_cubit.dart';
 import 'package:avitus/application/store_info/store_info_cubit.dart';
 import 'package:avitus/infrasurtucture/common/app_init.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => AppManagerCubit()..init()),
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => LoginCubit()),
+          BlocProvider(create: (context) => NotificationCubit()),
           BlocProvider(create: (context) => LoginCubit()),
         ],
         child: ScreenUtilInit(

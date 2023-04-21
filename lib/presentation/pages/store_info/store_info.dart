@@ -114,8 +114,7 @@ class StoreInfoPage extends StatelessWidget {
                       ],
                     )),
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-            floatingActionButton:
-                FabMenu(idName: firm.id.toString(), firm: firm),
+            floatingActionButton: FabMenu(firm: firm),
           );
         }),
       ),

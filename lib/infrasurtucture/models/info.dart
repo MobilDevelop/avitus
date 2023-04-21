@@ -3,6 +3,7 @@ List<Info> infoFromMap(List list) =>
 
 class Info {
   int id;
+  String name;
   bool type;
   int quantity;
   String paymentType;
@@ -12,6 +13,7 @@ class Info {
 
   Info(
       {required this.id,
+      required this.name,
       required this.type,
       required this.quantity,
       required this.paymentType,
@@ -21,6 +23,7 @@ class Info {
 
   factory Info.fromJson(Map<String, dynamic> json) => Info(
       id: json['id'],
+      name: json['name'],
       type: json['type'],
       quantity: json['quantity'],
       paymentType: json['paymentType'],
@@ -30,6 +33,7 @@ class Info {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'name': name,
         'type': type,
         'quantity': quantity,
         'paymentType': paymentType,

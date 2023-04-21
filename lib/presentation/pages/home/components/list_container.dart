@@ -72,6 +72,7 @@ class ListContainer extends StatelessWidget {
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
                   Container(
+                    alignment: Alignment.centerLeft,
                     width: 120.w,
                     child: Text(
                         firm.accountNumber!.isEmpty
@@ -94,6 +95,7 @@ class ListContainer extends StatelessWidget {
                       style: AppTheme.data.textTheme.headline2),
                   Gap(ScreenSize.h4),
                   Container(
+                    alignment: Alignment.centerRight,
                     width: 120.w,
                     child: Text(
                         firm.contractNumber!.isEmpty

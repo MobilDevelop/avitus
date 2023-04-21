@@ -4,6 +4,7 @@ import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/pages/add_store/add_store_page.dart';
 import 'package:avitus/presentation/pages/home/home_page.dart';
 import 'package:avitus/presentation/pages/login/login_page.dart';
+import 'package:avitus/presentation/pages/notification/notification_page.dart';
 import 'package:avitus/presentation/pages/store_info/store_info.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,14 @@ final GoRouter router = GoRouter(
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child: const HomePage(),
+        ),
+      ),
+      GoRoute(
+        name: Routes.notification.name,
+        path: Routes.notification.path,
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: const NotificationPage(),
         ),
       ),
       GoRoute(

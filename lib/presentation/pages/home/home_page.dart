@@ -59,7 +59,9 @@ class HomePage extends StatelessWidget {
                                   onPressed: cubit.showSearch,
                                   icon: SvgPicture.asset(AppIcons.search)),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.push(Routes.notification.path);
+                                  },
                                   icon:
                                       SvgPicture.asset(AppIcons.notification)),
                             ],

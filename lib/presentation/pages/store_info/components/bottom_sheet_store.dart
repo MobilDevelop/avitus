@@ -8,7 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class BottomShetStore {
-  static bottomSheetAdd(context, String idName) {
+  static bottomSheetAdd(context, Firm firm) {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -154,7 +154,7 @@ class BottomShetStore {
                         Expanded(
                             child: BorderButton(
                           onPressed: () {
-                            cubit.addInfo(true, idName);
+                            cubit.addInfo(true, firm);
                           },
                           text: tr('home.tasdiqlash'),
                         ))
@@ -170,7 +170,7 @@ class BottomShetStore {
     );
   }
 
-  static bottomSheetRemove(context, String idName) {
+  static bottomSheetRemove(context, Firm firm) {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -311,7 +311,7 @@ class BottomShetStore {
                             Expanded(
                                 child: BorderButton(
                               onPressed: () {
-                                cubit.addInfo(false, idName);
+                                cubit.addInfo(false, firm);
                               },
                               text: tr('home.tasdiqlash'),
                             ))
