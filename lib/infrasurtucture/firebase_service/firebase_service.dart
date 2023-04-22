@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/infrasurtucture/models/info.dart';
+import 'package:avitus/infrasurtucture/models/user.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class RTDBService {
@@ -46,6 +47,7 @@ class RTDBService {
 
   static Future<List<Info>> loadPosAlltInfo() async {
     List items = [];
+    int price = 0;
     Query _query = database.child('transfers');
     var snapshot = await _query.once();
     List result = snapshot.snapshot.value == null
@@ -60,6 +62,30 @@ class RTDBService {
   static Future<Stream<DatabaseEvent>> storePostInfo(
       Info info, String name) async {
     database.child('transfers').child(name).push().set(info.toJson());
+    return database.onChildAdded;
+  }
+
+  static Future<List<User>> loadPostUser() async {
+    List items = [];
+    Query _query = database.child('users');
+    var snapshot = await _query.once();
+    Map<String, dynamic> result = snapshot.snapshot.value == null
+        ? {}
+        : jsonDecode(jsonEncode(snapshot.snapshot.value));
+
+    items = result.entries.map((item) {
+      return {'key': item.key, 'user': item.value};
+    }).toList();
+    return userFromMap(items);
+  }
+
+  static Future<Stream<DatabaseEvent>> storePostUser(User user) async {
+    database.child("users").push().set(user.toJson());
+    return database.onChildAdded;
+  }
+
+  static Future<Stream<DatabaseEvent>> storePutUse(User user) async {
+    database.child("users").child(user.key).update(user.toJson());
     return database.onChildAdded;
   }
 
