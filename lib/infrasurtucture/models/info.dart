@@ -5,6 +5,7 @@ class Info {
   int id;
   String name;
   bool type;
+  bool pay;
   int quantity;
   String paymentType;
   String paymentDate;
@@ -15,6 +16,7 @@ class Info {
       {required this.id,
       required this.name,
       required this.type,
+      required this.pay,
       required this.quantity,
       required this.paymentType,
       required this.paymentDate,
@@ -25,6 +27,7 @@ class Info {
       id: json['id'],
       name: json['name'],
       type: json['type'],
+      pay: json['pay'],
       quantity: json['quantity'],
       paymentType: json['paymentType'],
       paymentDate: json['paymentDate'],
@@ -35,6 +38,7 @@ class Info {
         'id': id,
         'name': name,
         'type': type,
+        'pay': pay,
         'quantity': quantity,
         'paymentType': paymentType,
         'paymentDate': paymentDate,

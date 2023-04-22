@@ -11,34 +11,37 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      final cubit = context.read<NotificationCubit>();
-      return BlocBuilder<NotificationCubit, NotificationState>(
-          builder: (context, state) => Scaffold(
-                appBar: AppBar(
-                  elevation: 0,
-                  backgroundColor: AppTheme.colors.primary,
-                  title: Text(tr('notification.eslatma')),
-                  actions: [
-                    IconButton(
-                        onPressed: () {
-                          NotificationService()
-                              .showNotification(title: "salom", body: "alik");
-                        },
-                        icon: Icon(Icons.notification_add))
-                  ],
-                ),
-                body: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: ScreenSize.w10, vertical: ScreenSize.h10),
-                  child: ListView.builder(
-                    itemCount: cubit.items.length,
-                    itemBuilder: (context, index) => NotificationListWidget(
-                      item: cubit.items[index],
+    return BlocProvider(
+      create: (context) => NotificationCubit(),
+      child: Builder(builder: (context) {
+        final cubit = context.read<NotificationCubit>();
+        return BlocBuilder<NotificationCubit, NotificationState>(
+            builder: (context, state) => Scaffold(
+                  appBar: AppBar(
+                    elevation: 0,
+                    backgroundColor: AppTheme.colors.primary,
+                    title: Text(tr('notification.eslatma')),
+                    actions: [
+                      IconButton(
+                          onPressed: () {
+                            NotificationService()
+                                .showNotification(title: "salom", body: "alik");
+                          },
+                          icon: Icon(Icons.notification_add))
+                    ],
+                  ),
+                  body: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.w10, vertical: ScreenSize.h10),
+                    child: ListView.builder(
+                      itemCount: cubit.items.length,
+                      itemBuilder: (context, index) => NotificationListWidget(
+                        item: cubit.items[index],
+                      ),
                     ),
                   ),
-                ),
-              ));
-    });
+                ));
+      }),
+    );
   }
 }

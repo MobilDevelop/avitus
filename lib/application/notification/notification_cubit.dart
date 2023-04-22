@@ -13,6 +13,12 @@ class NotificationCubit extends Cubit<NotificationState> {
   void init() async {
     List<Info> noSort = await RTDBService.loadPosAlltInfo();
 
+    for (Info check in noSort) {
+      for (Info item in noSort) {
+        if (check.id == item.id) {}
+      }
+    }
+
     for (Info element in noSort) {
       if (element.type) {
         int residual = HelperMedhod.dateCalculate(element.dateOfNotice);

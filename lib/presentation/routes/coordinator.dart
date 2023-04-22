@@ -3,9 +3,10 @@
 import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/pages/add_store/add_store_page.dart';
 import 'package:avitus/presentation/pages/home/home_page.dart';
-import 'package:avitus/presentation/pages/login/login_page.dart';
 import 'package:avitus/presentation/pages/notification/notification_page.dart';
+import 'package:avitus/presentation/pages/secret/secret_page.dart';
 import 'package:avitus/presentation/pages/store_info/store_info.dart';
+import 'package:avitus/presentation/pages/users/users_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +15,7 @@ import 'entity/routes.dart';
 //final localSource = inject<LocalSource>();
 
 final GoRouter router = GoRouter(
-    initialLocation: Routes.home.path,
+    initialLocation: Routes.secret.path,
     debugLogDiagnostics: true,
     routes: <GoRoute>[
       GoRoute(
@@ -26,6 +27,14 @@ final GoRouter router = GoRouter(
         ),
       ),
       GoRoute(
+        name: Routes.users.name,
+        path: Routes.users.path,
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: const Users(),
+        ),
+      ),
+      GoRoute(
         name: Routes.notification.name,
         path: Routes.notification.path,
         pageBuilder: (context, state) => MaterialPage<void>(
@@ -34,11 +43,11 @@ final GoRouter router = GoRouter(
         ),
       ),
       GoRoute(
-        name: Routes.login.name,
-        path: Routes.login.path,
+        name: Routes.secret.name,
+        path: Routes.secret.path,
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
-          child: const LoginPage(),
+          child: const SecretPage(),
         ),
       ),
       GoRoute(

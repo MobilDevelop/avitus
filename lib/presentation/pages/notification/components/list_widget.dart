@@ -29,7 +29,13 @@ class NotificationListWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(item.name, style: AppTheme.data.textTheme.headline4),
+            Expanded(
+              child: Text(item.name,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTheme.data.textTheme.headline4),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -43,6 +49,7 @@ class NotificationListWidget extends StatelessWidget {
                         .copyWith(color: AppTheme.colors.red)),
               ],
             ),
+            Gap(ScreenSize.h24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

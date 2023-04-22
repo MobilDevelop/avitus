@@ -50,7 +50,11 @@ class HomePage extends StatelessWidget {
                     : AppBar(
                         elevation: 0,
                         toolbarHeight: 55.h,
-                        title: Text(tr('home.bosh_sahifa')),
+                        title: GestureDetector(
+                            onLongPress: () {
+                              context.push(Routes.users.path);
+                            },
+                            child: Text(tr('home.bosh_sahifa'))),
                         backgroundColor: AppTheme.colors.primary,
                         actions: [
                           Row(

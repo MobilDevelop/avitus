@@ -45,6 +45,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   bool enebled = true;
 
   chooseFirm(Firm? firm) {
+    emit(AddStoreLoading());
     if (firm == null) {
       addFirm();
     } else {
@@ -242,5 +243,34 @@ class AddStoreCubit extends Cubit<AddStoreState> {
             ],
           );
         });
+  }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    nameFocus.dispose();
+
+    accountNumberController.dispose();
+    accountNumberFocus.dispose();
+
+    contractNumberController.dispose();
+    contractNumberFocus.dispose();
+
+    NFOController.dispose();
+    NFOFocus.dispose();
+
+    INNController.dispose();
+    INNFocus.dispose();
+
+    phone1Controller.dispose();
+    phone1Focus.dispose();
+
+    phone2Controller.dispose();
+    phone2Focus.dispose();
+
+    phone3Controller.dispose();
+    phone3Focus.dispose();
+
+    return super.close();
   }
 }

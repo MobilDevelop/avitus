@@ -3,12 +3,16 @@ List<User> userFromMap(List list) =>
 
 class User {
   bool type;
+  String key;
   String keyPass;
 
-  User({required this.type, required this.keyPass});
+  User({required this.type, required this.key, required this.keyPass});
 
-  factory User.fromJson(Map<String, dynamic> json) =>
-      User(type: json['type'], keyPass: json['keyPass']);
+  factory User.fromJson(Map<String, dynamic> json) => User(
+      type: json['user']['type'],
+      key: json['key'],
+      keyPass: json['user']['keyPass']);
 
-  Map<String, dynamic> toJson() => {'type': type, 'keyPass': keyPass};
+  Map<String, dynamic> toJson() =>
+      {'type': type, 'key': key, 'keyPass': keyPass};
 }

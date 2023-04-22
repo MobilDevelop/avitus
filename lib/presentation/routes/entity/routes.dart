@@ -1,5 +1,3 @@
-// Created by Muhammed Tolkinov on 16-September-2022
-
 import 'coordinate.dart';
 
 /// A set of routes for the entire app.
@@ -16,6 +14,14 @@ class Routes implements Coordinate {
     name: 'home_page',
     path: '/home',
   );
+  static const users = Routes._(
+    name: 'users_page',
+    path: '/users',
+  );
+  static const secret = Routes._(
+    name: 'secret_page',
+    path: '/secret',
+  );
   static const notification = Routes._(
     name: 'notification_page',
     path: '/notification',
@@ -24,11 +30,6 @@ class Routes implements Coordinate {
     name: 'add_store_page',
     path: '/add_store',
   );
-  static const login = Routes._(
-    name: 'login_page',
-    path: '/login',
-  );
-
   static const storeInfo = Routes._(
     name: 'store_info_page',
     path: '/store_info',
