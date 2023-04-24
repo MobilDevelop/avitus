@@ -53,7 +53,7 @@ class ColorButton extends StatelessWidget {
         width: width,
         margin: EdgeInsets.symmetric(horizontal: ScreenSize.w4),
         padding: EdgeInsets.symmetric(
-            horizontal: icon != null ? 0 : ScreenSize.w24,
+            horizontal: icon != null ? 0 : ScreenSize.w4,
             vertical: ScreenSize.h12),
         decoration: BoxDecoration(
             color: backgroundColor == null

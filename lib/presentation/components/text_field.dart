@@ -1,5 +1,6 @@
 import 'package:avitus/presentation/assets/asset_index.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class TextFieldView extends StatelessWidget {
   const TextFieldView({
@@ -28,7 +29,13 @@ class TextFieldView extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         enabled: enebled,
-        keyboardType: chooseType ? TextInputType.number : TextInputType.text,
+        keyboardType: chooseType ? TextInputType.number : TextInputType.number,
+        inputFormatters: [
+          MaskTextInputFormatter(
+              mask: '####################',
+              filter: {"#": RegExp(r'[0-9]')},
+              type: MaskAutoCompletionType.lazy)
+        ],
         decoration: InputDecoration(
           label: Text(
             labelText,

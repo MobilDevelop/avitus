@@ -47,14 +47,28 @@ class RTDBService {
 
   static Future<List<Info>> loadPosAlltInfo() async {
     List items = [];
-    int price = 0;
+    var big;
+
     Query _query = database.child('transfers');
     var snapshot = await _query.once();
-    List result = snapshot.snapshot.value == null
-        ? {}
+    var result = snapshot.snapshot.value == null
+        ? []
         : jsonDecode(jsonEncode(snapshot.snapshot.value));
     for (var element in result) {
-      items += element.entries.map((item) => item.value).toList();
+      List list = element.entries.map((item) => item.value).toList();
+      if (list.length == 1) {
+        big = list[0];
+      } else {
+        for (int i = 0; i < list.length; i++) {
+          for (int j = i; j < list.length; j++) {
+            if (list[j]['id'] > list[i]['id']) {
+              big = list[j];
+            }
+          }
+        }
+      }
+
+      items.add(big);
     }
     return infoFromMap(items);
   }

@@ -10,14 +10,10 @@ class NotificationCubit extends Cubit<NotificationState> {
 
   List<Info> items = [];
 
+  bool loading = true;
+
   void init() async {
     List<Info> noSort = await RTDBService.loadPosAlltInfo();
-
-    for (Info check in noSort) {
-      for (Info item in noSort) {
-        if (check.id == item.id) {}
-      }
-    }
 
     for (Info element in noSort) {
       if (element.type) {
@@ -27,7 +23,7 @@ class NotificationCubit extends Cubit<NotificationState> {
         }
       }
     }
-
+    loading = false;
     emit(NotificationInitial());
   }
 }

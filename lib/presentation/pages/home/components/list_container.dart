@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:avitus/infrasurtucture/models/firm_model.dart';
@@ -42,9 +43,9 @@ class ListContainer extends StatelessWidget {
                         ),
                       )
                     : ClipRRect(
-                        borderRadius: BorderRadius.circular(10.r),
-                        child: Image.file(
-                          File(firm.image!),
+                        borderRadius: BorderRadius.circular(9.r),
+                        child: Image.memory(
+                          base64Decode(firm.image!),
                           fit: BoxFit.cover,
                         ),
                       ),

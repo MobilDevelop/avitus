@@ -34,6 +34,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
   late File image;
   bool nullImage = true;
   bool chek = false;
+  String? baseImg;
 
   List<Provins> provins = [];
   List<Districts> allDistricts = [];
@@ -46,18 +47,23 @@ class AddStoreCubit extends Cubit<AddStoreState> {
 
   chooseFirm(Firm? firm) {
     emit(AddStoreLoading());
+    String? base64Image;
+    if (!nullImage) {
+      List<int> imageBytes = image.readAsBytesSync();
+      base64Image = base64Encode(imageBytes);
+    }
     if (firm == null) {
-      addFirm();
+      addFirm(base64Image);
     } else {
-      editFirm(firm);
+      editFirm(firm, base64Image);
     }
   }
 
-  editFirm(Firm firm) {
+  editFirm(Firm firm, String? img) {
     String name = nameController.text.trim();
     String account = accountNumberController.text.trim();
     String contract = contractNumberController.text.trim();
-    String imagePath = nullImage ? "" : image.path;
+    String imagePath = img ?? '';
     String nfo = NFOController.text.trim();
     String inn = INNController.text.trim();
     String phone1 = phone1Controller.text.trim();
@@ -82,7 +88,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     emit(AddStoreSucces(tr('addStore.yangilandi')));
   }
 
-  addFirm() async {
+  addFirm(String? img) async {
     List<Firm> firms = await RTDBService.loadPostFirm();
     firms.sort(
       (a, b) => a.id.compareTo(b.id),
@@ -91,7 +97,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
     String name = nameController.text.trim();
     String account = accountNumberController.text.trim();
     String contract = contractNumberController.text.trim();
-    String imagePath = nullImage ? "" : image.path;
+    String imagePath = img ?? '';
     String nfo = NFOController.text.trim();
     String inn = INNController.text.trim();
     String phone1 = phone1Controller.text.trim();
@@ -173,7 +179,7 @@ class AddStoreCubit extends Cubit<AddStoreState> {
       phone3Controller.text = firm.phone3!;
       selectProvins = firm.provins;
       if (firm.image!.isNotEmpty) {
-        image = File(firm.image!);
+        baseImg = firm.image;
         nullImage = false;
         chek = true;
       }

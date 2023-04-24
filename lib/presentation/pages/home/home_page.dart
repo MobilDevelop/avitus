@@ -1,6 +1,7 @@
 import 'package:avitus/application/home/home_cubit.dart';
 import 'package:avitus/application/home/home_state.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
+import 'package:avitus/presentation/components/laoding.dart';
 import 'package:avitus/presentation/pages/home/components/app_bar_search.dart';
 import 'package:avitus/presentation/pages/home/components/list_container.dart';
 import 'package:avitus/presentation/routes/index_routes.dart';
@@ -17,18 +18,15 @@ class HomePage extends StatelessWidget {
       if (state is HomeError) {
         print(state.msg);
       }
-      if (state is HomeLoaded) {
-        print(state.msg);
+      if (state is HomeLoading) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppTheme.colors.primary,
             content: Text(
-              state.msg,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-              ),
+              "salom hammaa",
+              textAlign: TextAlign.center,
+              style: AppTheme.data.textTheme.headline4
+                  ?.copyWith(color: AppTheme.colors.secondary),
             ),
           ),
         );
@@ -72,21 +70,23 @@ class HomePage extends StatelessWidget {
                           )
                         ],
                       ),
-                body: Padding(
-                  padding: EdgeInsets.all(ScreenSize.w10),
-                  child: RefreshIndicator(
-                    onRefresh: cubit.refresh,
-                    child: ListView.builder(
-                        itemCount: cubit.searchFirms.length,
-                        itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              context.push(Routes.storeInfo.path,
-                                  extra: cubit.searchFirms[index]);
-                            },
-                            child:
-                                ListContainer(firm: cubit.searchFirms[index]))),
-                  ),
-                ),
+                body: cubit.loading
+                    ? Loading()
+                    : Padding(
+                        padding: EdgeInsets.all(ScreenSize.w10),
+                        child: RefreshIndicator(
+                          onRefresh: cubit.refresh,
+                          child: ListView.builder(
+                              itemCount: cubit.searchFirms.length,
+                              itemBuilder: (context, index) => InkWell(
+                                  onTap: () {
+                                    context.push(Routes.storeInfo.path,
+                                        extra: cubit.searchFirms[index]);
+                                  },
+                                  child: ListContainer(
+                                      firm: cubit.searchFirms[index]))),
+                        ),
+                      ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
                     context.push(Routes.addStore.path, extra: null);

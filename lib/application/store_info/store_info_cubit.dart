@@ -18,13 +18,16 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
 
   List<Info> items = [];
   int allSumm = 0;
+  bool loading = true;
 
   int typeIndex = 0;
 
   String noticeDate = '';
 
   void init(String name) async {
+    loading = true;
     allSumm = 0;
+    emit(StoreInfoInit());
     if (name.isNotEmpty) {
       List<Info> noSort = await RTDBService.loadPostInfo(name);
       noSort.sort(
@@ -40,8 +43,9 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
           allSumm -= item.quantity;
         }
       }
-      emit(StoreInfoInit());
     }
+    loading = false;
+    emit(StoreInfoInit());
   }
 
   void addInfo(bool type, Firm firm) async {

@@ -1,4 +1,4 @@
-import 'package:avitus/presentation/assets/asset_index.dart';
+import 'package:avitus/application/home/home_index.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -7,31 +7,29 @@ class NotificationService {
 
   Future<void> initNotification() async {
     AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings(AppIcons.noImage);
+        AndroidInitializationSettings('mipmap/ic_launcher');
 
-    var initializationSettingsIOS = DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) async {});
+    var initializationSettingsIOS = DarwinInitializationSettings();
 
     var initalizationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await notificationsPlugin.initialize(initalizationSettings,
-        onDidReceiveBackgroundNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+
+    await notificationsPlugin.initialize(initalizationSettings);
   }
 
   notificationDetails() {
     return const NotificationDetails(
         android: AndroidNotificationDetails("channelId", "channelName",
+            playSound: true,
+            color: Colors.green,
+            priority: Priority.high,
             importance: Importance.max),
         iOS: DarwinNotificationDetails());
   }
 
   Future showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
-    notificationsPlugin.show(id, title, body, await notificationDetails());
+    notificationsPlugin.show(id, title, body, await notificationDetails(),
+        payload: payload);
   }
 }

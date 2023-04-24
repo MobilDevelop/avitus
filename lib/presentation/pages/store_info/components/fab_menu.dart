@@ -65,7 +65,7 @@ class _FabMenuState extends State<FabMenu> with SingleTickerProviderStateMixin {
                   BottomShetStore.bottomSheetRemove(context, widget.firm);
                 } else if (icon.codePoint == 57415) {
                   BottomShetStore.bottomSheetAdd(context, widget.firm);
-                } else {
+                } else if (icon.codePoint == 58172) {
                   context.push(Routes.addStore.path, extra: widget.firm);
                 }
               } else {

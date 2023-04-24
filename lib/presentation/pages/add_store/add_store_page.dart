@@ -1,4 +1,5 @@
 import 'package:avitus/application/add_store/add_store_cubit.dart';
+import 'package:avitus/application/add_store/add_store_index.dart';
 import 'package:avitus/application/add_store/add_store_state.dart';
 import 'package:avitus/infrasurtucture/models/firm_model.dart';
 import 'package:avitus/presentation/assets/asset_index.dart';
@@ -41,6 +42,9 @@ class AddStore extends StatelessWidget {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: AppTheme.colors.primary,
+              title: Text(firm == null
+                  ? tr('addStore.firma_qoshish')
+                  : tr('addStore.tahrirlash')),
               actions: [
                 Visibility(
                     visible: firm != null,
@@ -75,14 +79,23 @@ class AddStore extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.r),
                                     ),
                                     child: cubit.chek
-                                        ? ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            child: Image.file(
-                                              cubit.image,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          )
+                                        ? firm == null
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                child: Image.file(
+                                                  cubit.image,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                child: Image.memory(
+                                                  base64Decode(cubit.baseImg!),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )
                                         : SvgPicture.asset(
                                             AppIcons.camera,
                                             fit: BoxFit.scaleDown,
@@ -159,22 +172,25 @@ class AddStore extends StatelessWidget {
                                     enebled: cubit.enebled,
                                     labelText: tr('addStore.telefon')),
                                 BlocBuilder<AddStoreCubit, AddStoreState>(
-                                    builder: (_, state) => MainButton(
-                                          onPressed: () {
-                                            if (cubit.enebled) {
-                                              cubit.chooseFirm(firm);
-                                            }
-                                          },
-                                          text: tr('addStore.saqlash'),
-                                          margin: EdgeInsets.only(
-                                            top: 10.h,
-                                            bottom: MediaQuery.of(context)
-                                                .viewPadding
-                                                .bottom,
+                                    builder: (_, state) => Visibility(
+                                          visible: cubit.enebled,
+                                          child: MainButton(
+                                            onPressed: () {
+                                              if (cubit.enebled) {
+                                                cubit.chooseFirm(firm);
+                                              }
+                                            },
+                                            text: tr('addStore.saqlash'),
+                                            margin: EdgeInsets.only(
+                                              top: 10.h,
+                                              bottom: MediaQuery.of(context)
+                                                  .viewPadding
+                                                  .bottom,
+                                            ),
+                                            showLoading:
+                                                (state is AddStoreLoading) &&
+                                                    true,
                                           ),
-                                          showLoading:
-                                              (state is AddStoreLoading) &&
-                                                  true,
                                         ))
                               ],
                             ),
